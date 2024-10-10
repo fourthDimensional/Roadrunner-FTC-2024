@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.commands.*;
 @TeleOp(name= "ExampleRobotOpMode", group="Examples")
 public class ExampleRobotOpMode extends CommandOpMode {
     private ExampleArmSubsystem m_exampleArmSubsystem;
-    private Gamepad gamepad;
+    private Gamepad gamepad = new Gamepad();
 
     @Override
     public void initialize() {
@@ -22,6 +22,7 @@ public class ExampleRobotOpMode extends CommandOpMode {
                 hardwareMap.get(DcMotor.class, "LeftArmMotor"),
                 hardwareMap.get(DcMotor.class, "RightArmMotor"),
                 hardwareMap.get(Servo.class, "ArmServo"));
+                
 
         // This will make the default for the test subsystems.
         m_exampleArmSubsystem.setDefaultCommand(new SetToOriginalPosition(m_exampleArmSubsystem));

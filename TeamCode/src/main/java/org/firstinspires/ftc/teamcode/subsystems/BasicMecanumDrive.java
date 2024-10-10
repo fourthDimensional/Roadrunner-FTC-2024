@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
+import com.arcrobotics.ftclib.drivebase.MecanumDrive;
+import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.geometry.Translation2d;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -39,24 +41,16 @@ public class BasicMecanumDrive extends SubsystemBase {
 
     }
 
-    public void Drive(Translation2d position) {
-        double translationX = position.getX();
-        double translationY = position.getY();
-        double currentX = 0; // TODO Get the position values from IMU or Odometry
-        double currentY = 0;
-        double angle = Math.sinh((translationX - currentX)/(translationY - currentY));
-        double pi = 3.14159265;
+    public void mecanumDrive(GamepadEx gamepad) {
 
         // Setting the powers
-        double x = Math.sin((pi * angle) / 180);
-        double y = Math.cos((pi * angle) / 180);
+        double x = gamepad.getLeftX();
+        double y = gamepad.getLeftY();
+        double t = gamepad.getRightX();
 
-        frontLeft.setPower(y + x);
-        frontRight.setPower(y - x);
-        backLeft.setPower(y - x);
-        backRight.setPower(y + x);
-
-        // TODO Find out how to get to position
-
+        frontLeft.setPower(y + x + t);
+        frontRight.setPower(y - x + t);
+        backLeft.setPower(y - x - t);
+        backRight.setPower(y + x - t);
     }
 }

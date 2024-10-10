@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.commands;
 
 import com.arcrobotics.ftclib.command.CommandBase;
+import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.subsystems.TestSubsystem;
@@ -9,7 +10,7 @@ public class TestDriveCommand extends CommandBase {
 
     private final TestSubsystem m_testSubsystem;
 
-    private final Gamepad gamepad;
+    private final GamepadEx gamepad;
     /**
      * Command to set the test motor to run forwards at specified speed in <code>Constants.java</code>.
      *
@@ -17,7 +18,7 @@ public class TestDriveCommand extends CommandBase {
      *
      * @see org.firstinspires.ftc.teamcode.Constants
      */
-    public TestDriveCommand(TestSubsystem testSubsystem, Gamepad gamepad) {
+    public TestDriveCommand(TestSubsystem testSubsystem, GamepadEx gamepad) {
         this.gamepad = gamepad;
         this.m_testSubsystem = testSubsystem;
         addRequirements(m_testSubsystem);
@@ -25,12 +26,12 @@ public class TestDriveCommand extends CommandBase {
 
     @Override
     public void initialize(){
-        m_testSubsystem.forward();
+
     }
 
     @Override
     public void execute(){
-        m_testSubsystem.drive(gamepad.left_stick_x);
+        m_testSubsystem.drive(gamepad.getLeftY());
     }
 
     // Called once the command ends or is interrupted.
